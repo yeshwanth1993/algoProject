@@ -59,15 +59,18 @@ class Graph (object):
     def network_flow(self, s, t):
         # Flow of graph
         flow = 0
+        paths_taken = []
 
         # Make a copy of dict
         copy_of_self = copy.deepcopy(self)
         while True:
             path = copy_of_self.find_a_path(s, t)
+            print(path)
             if len(path) == 0:
-                return flow
+                return flow, paths_taken
 
             curr_flow = copy_of_self.calc_flow(path)
+            paths_taken.append((path, curr_flow))
             flow += curr_flow
 
     def remove_connection(self, s, t):
@@ -111,4 +114,51 @@ class Graph (object):
         flow = min(flow_of_path)
         self.update_residual_graph(path, flow)
         return flow
+
+class Bipartate(Graph):
+    def __init__(self, tasks_mapping, worker_limit):
+        Graph.__init__(self, [])
+        for task in tasks_mapping:
+            self.add_connection(['s', task, 1])
+            for node in tasks_mapping[task]:
+                self.add_connection([task, node, 1])
+        for node in worker_limit:
+            self.add_connection([node, 't', worker_limit[node]])
+
+
+    def match(self):
+        matched_dict = {}
+        flow, paths_taken = self.network_flow('s', 't')
+
+        print(paths_taken)
+        for path in paths_taken:
+
+            try:
+                matched_dict[path[0][1]].append(path[0][-2])
+            except KeyError:
+                print(path[0][1])
+                matched_dict[path[0][1]] = [path[0][-2]]
+
+        return matched_dict
+
+
+
+tasks_map = {'tas1': ['w1', 'w2', 'w3'], 'tas2': ['w1', 'w2', 'w3']}
+workers = {'w1': 1, 'w2': 5, 'w3': 7}
+a = Bipartate(tasks_map, workers)
+
+print(Bipartate.match(a))
+
+
+
+
+
+
+
+
+
+
+
+
+
 

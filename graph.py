@@ -30,6 +30,22 @@ class Graph (object):
                     if self.g[i][j][0] == node:
                         del self.g[i][j]
 
+    def bfs(self, s, t, x, parent_dict):
+        x.append(s)
+        while True:
+            try:
+                parent = x.pop(0)
+                if parent == t:
+                    return True
+                for i in range(len(self.g[parent])):
+                    x.append(self.g[parent][i][0])
+                    parent_dict[x[-1]] = parent
+
+            except KeyError:
+                continue
+            except IndexError:
+                break
+
     def dfs(self, s, t, x):
         x.append(s)
         try:
@@ -49,6 +65,25 @@ class Graph (object):
 
         return False
 
+    def find_shortest_path(self, s, t):
+        visited = []
+        parent_dict = {}
+        path = []
+        status = self.bfs(s, t, visited, parent_dict)
+        if status:
+            path.append(t)
+            while True:
+                if parent_dict[t] == s:
+                    path.append(s)
+                    path.reverse()
+                    print('Printinf inseide find_shortest_path:')
+                    print(path)
+                    return path
+                else:
+                    t = parent_dict[t]
+                    path.append(t)
+        return []
+
     def find_a_path(self, s, t):
         visited = []
         status = self.dfs(s, t, visited)
@@ -64,8 +99,7 @@ class Graph (object):
         # Make a copy of dict
         copy_of_self = copy.deepcopy(self)
         while True:
-            path = copy_of_self.find_a_path(s, t)
-            print(path)
+            path = copy_of_self.find_shortest_path(s, t)
             if len(path) == 0:
                 return flow, paths_taken
 
@@ -125,29 +159,24 @@ class Bipartate(Graph):
         for node in worker_limit:
             self.add_connection([node, 't', worker_limit[node]])
 
-
     def match(self):
         matched_dict = {}
         flow, paths_taken = self.network_flow('s', 't')
-
-        print(paths_taken)
         for path in paths_taken:
 
             try:
                 matched_dict[path[0][1]].append(path[0][-2])
             except KeyError:
-                print(path[0][1])
                 matched_dict[path[0][1]] = [path[0][-2]]
 
         return matched_dict
 
+if __name__ == '__main__':
+    tasks_map = {'tas1': ['w1','w2','w3'], 'tas2': ['w1', 'w2', 'w3'], 'tas3': ['w1']}
+    workers = {'w1': 2, 'w2': 3, 'w3': 0}
+    a = Bipartate(tasks_map, workers)
 
-
-tasks_map = {'tas1': ['w1', 'w2', 'w3'], 'tas2': ['w1', 'w2', 'w3']}
-workers = {'w1': 1, 'w2': 5, 'w3': 7}
-a = Bipartate(tasks_map, workers)
-
-print(Bipartate.match(a))
+    print(a.match())
 
 
 

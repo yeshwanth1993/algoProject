@@ -38,6 +38,8 @@ class Graph (object):
                 if parent == t:
                     return True
                 for i in range(len(self.g[parent])):
+                    if self.g[parent][i][0] in parent_dict:
+                        continue
                     x.append(self.g[parent][i][0])
                     parent_dict[x[-1]] = parent
 
@@ -76,8 +78,6 @@ class Graph (object):
                 if parent_dict[t] == s:
                     path.append(s)
                     path.reverse()
-                    print('Printinf inseide find_shortest_path:')
-                    print(path)
                     return path
                 else:
                     t = parent_dict[t]
@@ -162,8 +162,9 @@ class Bipartate(Graph):
     def match(self):
         matched_dict = {}
         flow, paths_taken = self.network_flow('s', 't')
+        print('Flow:' + str(flow))
+        print(paths_taken)
         for path in paths_taken:
-
             try:
                 matched_dict[path[0][1]].append(path[0][-2])
             except KeyError:
@@ -172,8 +173,8 @@ class Bipartate(Graph):
         return matched_dict
 
 if __name__ == '__main__':
-    tasks_map = {'tas1': ['w1','w2','w3'], 'tas2': ['w1', 'w2', 'w3'], 'tas3': ['w1']}
-    workers = {'w1': 2, 'w2': 3, 'w3': 0}
+    tasks_map = {'tas1': ['w1'], 'tas2': ['w1', 'w2'], 'tas3': ['w1']}
+    workers = {'w1': 2, 'w2': 1, 'w3': 1}
     a = Bipartate(tasks_map, workers)
 
     print(a.match())

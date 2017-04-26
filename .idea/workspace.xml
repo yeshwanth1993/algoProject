@@ -26,8 +26,8 @@
       <file leaf-file-name="graph.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/graph.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="217" column="76" lean-forward="false" selection-start-line="217" selection-start-column="76" selection-end-line="217" selection-end-column="76" />
+            <state relative-caret-position="512">
+              <caret line="225" column="39" lean-forward="false" selection-start-line="225" selection-start-column="39" selection-end-line="225" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -459,7 +459,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493179507160</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added comments&#10;">
+      <created>1493181162588</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1493181162588</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -514,7 +521,8 @@
     <MESSAGE value="bipartate&#10;" />
     <MESSAGE value="Bipartate class included" />
     <MESSAGE value="&#10;all code in bipartate, made math function use two algorithms, for-f and edmond-k. Please test! works fine for now" />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;all code in bipartate, made math function use two algorithms, for-f and edmond-k. Please test! works fine for now" />
+    <MESSAGE value="Added comments&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added comments&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -549,8 +557,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/graph.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="217" column="76" lean-forward="false" selection-start-line="217" selection-start-column="76" selection-end-line="217" selection-end-column="76" />
+        <state relative-caret-position="512">
+          <caret line="225" column="39" lean-forward="false" selection-start-line="225" selection-start-column="39" selection-end-line="225" selection-end-column="39" />
           <folding />
         </state>
       </provider>

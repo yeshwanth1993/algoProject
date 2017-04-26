@@ -219,3 +219,8 @@ if __name__ == '__main__':
 
     conn = [['s', 'a', 15], ['s', 'c', 20], ['a', 'c', 10], ['a', 'b', 3], ['c', 'b', 12], ['c', 't', 15], ['b', 't', 20]]
     b = Graph(conn)
+    # network flow usinf Ford-f
+    print(b.network_flow('s', 't'))
+
+    # flow using ed-k
+    print(b.network_flow('s', 't', True))

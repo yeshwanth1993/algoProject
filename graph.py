@@ -20,6 +20,12 @@ class Graph (object):
         except KeyError:
             self.g[connection[0]] = [[connection[1], connection[2]]]
 
+    def remove_connection(self, s, t):
+        for i in range(len(self.g[s])):
+            if self.g[s][i][0] == t:
+                del self.g[s][i]
+                return
+
     def remove_node(self, node):
         try:
             del self.g[node]
@@ -111,11 +117,21 @@ class Graph (object):
             paths_taken.append((path, curr_flow))
             flow += curr_flow
 
-    def remove_connection(self, s, t):
-        for i in range(len(self.g[s])):
-            if self.g[s][i][0] == t:
-                del self.g[s][i]
-                return
+    def calc_flow(self, path):
+        # calculate lowest flow in path
+        flow_of_path = []
+        try:
+            for i in range(len(path)):
+                for j in range(len(self.g[path[i]])):
+                    if self.g[path[i]][j][0] == path[i+1]:
+                        # Flow from i--> i+1 in path array
+                        flow_of_path.append(self.g[path[i]][j][1])
+
+        except (IndexError, KeyError):
+            pass
+        flow = min(flow_of_path)
+        self.update_residual_graph(path, flow)
+        return flow
 
     def update_residual_graph(self, path, flow):
         # Calculating residual graph
@@ -136,23 +152,6 @@ class Graph (object):
 
         except KeyError:
             pass
-
-    def calc_flow(self, path):
-        # calculate lowest flow in path
-        flow_of_path = []
-        try:
-            for i in range(len(path)):
-                for j in range(len(self.g[path[i]])):
-                    if self.g[path[i]][j][0] == path[i+1]:
-                        # Flow from i--> i+1 in path array
-                        flow_of_path.append(self.g[path[i]][j][1])
-
-        except (IndexError, KeyError):
-            pass
-        flow = min(flow_of_path)
-        self.update_residual_graph(path, flow)
-        return flow
-
 
 class Bipartate(Graph):
     def __init__(self, tasks_mapping, worker_limit):
@@ -205,22 +204,18 @@ class Bipartate(Graph):
         return matched_dict
 
 if __name__ == '__main__':
-    tasks_map = {'tas1': ['w1'], 'tas2': ['w1', 'w2'], 'tas3': ['w1']}
+    # Testing of bipartate class which is built on Graph class
+    tasks_map = {'tas1': ['w1'], 'tas2': ['w2'], 'tas3': ['w1']}
     workers = {'w1': 1, 'w2': 1, 'w3': 1}
     a = Bipartate(tasks_map, workers)
 
+    # Testing using both algorithms
+    print(a.match('ford-f'))
     print(a.match('edmond-k'))
 
+    # THis is Testing of graph class itself where graph is constructed using the conn array
+    # The connection array is comprised of smaller arrays, each small array
+    # represents an edge ['source_node', 'Destination_node', 'Weight_of_edge']
 
-
-
-
-
-
-
-
-
-
-
-
-
+    conn = [['s', 'a', 15], ['s', 'c', 20], ['a', 'c', 10], ['a', 'b', 3], ['c', 'b', 12], ['c', 't', 15], ['b', 't', 20]]
+    b = Graph(conn)

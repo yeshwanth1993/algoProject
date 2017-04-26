@@ -91,7 +91,7 @@ class Graph (object):
             return visited
         return []
 
-    def network_flow(self, s, t):
+    def network_flow(self, s, t, ek=False):
         # Flow of graph
         flow = 0
         paths_taken = []
@@ -99,7 +99,11 @@ class Graph (object):
         # Make a copy of dict
         copy_of_self = copy.deepcopy(self)
         while True:
-            path = copy_of_self.find_shortest_path(s, t)
+            if ek:
+                path = copy_of_self.find_shortest_path(s, t)
+            else:
+                path = copy_of_self.find_a_path(s, t)
+
             if len(path) == 0:
                 return flow, paths_taken
 
@@ -149,6 +153,7 @@ class Graph (object):
         self.update_residual_graph(path, flow)
         return flow
 
+
 class Bipartate(Graph):
     def __init__(self, tasks_mapping, worker_limit):
         Graph.__init__(self, [])
@@ -159,25 +164,52 @@ class Bipartate(Graph):
         for node in worker_limit:
             self.add_connection([node, 't', worker_limit[node]])
 
-    def match(self):
+    def match(self, algorithm='ford-f'):
         matched_dict = {}
-        flow, paths_taken = self.network_flow('s', 't')
-        print('Flow:' + str(flow))
+        if algorithm == 'ford-f':
+            flow, paths_taken = self.network_flow('s', 't')
+        elif algorithm == 'edmond-k':
+            flow, paths_taken = self.network_flow('s', 't', True)
+        else:
+            raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
         print(paths_taken)
         for path in paths_taken:
-            try:
-                matched_dict[path[0][1]].append(path[0][-2])
-            except KeyError:
-                matched_dict[path[0][1]] = [path[0][-2]]
+            if len(path[0]) == 4:
+                for node in path[0]:
+                    if node[0] == 'w':
+                        try:
+                            matched_dict[path[0][path[0].index(node) - 1]].append(node)
+                        except KeyError:
+                            matched_dict[path[0][path[0].index(node) - 1]] = [node]
+            elif len(path[0]) == 6:
+                first_path = True
+                for node in path[0]:
+                    if node[0] == 'w' and first_path:
+                        try:
+                            matched_dict[path[0][path[0].index(node) - 1]].append(node)
+                            first_path = False
+                        except KeyError:
+                            matched_dict[path[0][path[0].index(node) - 1]] = [node]
+                            first_path = False
+                    elif node[0] == 'w':
+                        try:
+                            matched_dict[path[0][path[0].index(node) - 1]].remove(path[0][path[0].index(node) - 2])
+                            matched_dict[path[0][path[0].index(node) - 1]].append(node)
+                        except KeyError:
+                            matched_dict[path[0][path[0].index(node) - 1]].remove(path[0][path[0].index(node) - 2])
+                            matched_dict[path[0][path[0].index(node) - 1]] = [node]
+
+            else:
+                raise TypeError('Returned type of path is not acceptable.')
 
         return matched_dict
 
 if __name__ == '__main__':
     tasks_map = {'tas1': ['w1'], 'tas2': ['w1', 'w2'], 'tas3': ['w1']}
-    workers = {'w1': 2, 'w2': 1, 'w3': 1}
+    workers = {'w1': 1, 'w2': 1, 'w3': 1}
     a = Bipartate(tasks_map, workers)
 
-    print(a.match())
+    print(a.match('edmond-k'))
 
 
 

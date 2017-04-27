@@ -1,6 +1,5 @@
 import copy
 
-
 class Graph (object):
     def __init__(self, connections):
         self.g = {}
@@ -25,16 +24,6 @@ class Graph (object):
             if self.g[s][i][0] == t:
                 del self.g[s][i]
                 return
-    def find_connection(self, s, t):
-        """Return weight between s and t, if no connection return 0"""
-        try:
-            for node in self.g[s]:
-                if node[0] == t:
-                    return node[1]
-
-            return 0
-        except KeyError:
-            return 0
 
     def remove_node(self, node):
         try:
@@ -45,6 +34,17 @@ class Graph (object):
                 for j in range(len(self.g[i])):
                     if self.g[i][j][0] == node:
                         del self.g[i][j]
+
+    def find_connection(self, s, t):
+        """Return weight between s and t, if no connection return 0"""
+        try:
+            for node in self.g[s]:
+                if node[0] == t:
+                    return node[1]
+
+            return 0
+        except KeyError:
+            return 0
 
     def bfs(self, s, t, x, parent_dict):
         x.append(s)
@@ -83,6 +83,24 @@ class Graph (object):
 
         return False
 
+    def dfs_wo_pop(self, s, t, x):
+        x.append(s)
+        try:
+            for i in range(len(self.g[s])):
+                if self.g[s][i][0] in x:
+                    continue
+                if self.g[s][i][0] == t:
+                    x.append(t)
+                    return True
+                status = self.dfs(self.g[s][i][0], t, x)
+                if status:
+                    return True
+
+        except:
+            return False
+
+        return False
+
     def find_shortest_path(self, s, t):
         visited = []
         parent_dict = {}
@@ -114,6 +132,7 @@ class Graph (object):
 
         # Make a copy of dict
         copy_of_self = copy.deepcopy(self)
+        residual_graph = copy.deepcopy(self)
         while True:
             if ek:
                 path = copy_of_self.find_shortest_path(s, t)
@@ -121,9 +140,9 @@ class Graph (object):
                 path = copy_of_self.find_a_path(s, t)
 
             if len(path) == 0:
-                return flow, paths_taken
+                return flow, paths_taken, residual_graph
 
-            curr_flow = copy_of_self.calc_flow(path)
+            curr_flow, residual_graph = copy_of_self.calc_flow(path)
             paths_taken.append((path, curr_flow))
             flow += curr_flow
 
@@ -140,8 +159,8 @@ class Graph (object):
         except (IndexError, KeyError):
             pass
         flow = min(flow_of_path)
-        self.update_residual_graph(path, flow)
-        return flow
+        residual_graph = self.update_residual_graph(path, flow)
+        return flow, residual_graph
 
     def update_residual_graph(self, path, flow):
         # Calculating residual graph
@@ -162,78 +181,5 @@ class Graph (object):
 
         except KeyError:
             pass
+        return self
 
-class Bipartate_case1(Graph):
-    def __init__(self, tasks_mapping, worker_limit):
-        Graph.__init__(self, [])
-        for task in tasks_mapping:
-            self.add_connection(['s', task, 1])
-            for node in tasks_mapping[task]:
-                self.add_connection([task, node, 1])
-        for node in worker_limit:
-            self.add_connection([node, 't', worker_limit[node]])
-
-    def match(self, algorithm='ford-f'):
-        matched_dict = {}
-        if algorithm == 'ford-f':
-            flow, paths_taken = self.network_flow('s', 't')
-        elif algorithm == 'edmond-k':
-            flow, paths_taken = self.network_flow('s', 't', True)
-        else:
-            raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
-        print(paths_taken)
-        for path in paths_taken:
-            if len(path[0]) == 4:
-                for node in path[0]:
-                    if node[0] == 'w':
-                        try:
-                            matched_dict[path[0][path[0].index(node) - 1]].append(node)
-                        except KeyError:
-                            matched_dict[path[0][path[0].index(node) - 1]] = [node]
-            elif len(path[0]) == 6:
-                first_path = True
-                for node in path[0]:
-                    index_of_node = path[0].index(node)
-                    previous_node_in_path = path[0][index_of_node - 1]
-
-                    if node[0] == 'w' and first_path:
-                        try:
-                            matched_dict[previous_node_in_path].append(node)
-                            first_path = False
-                        except KeyError:
-                            matched_dict[previous_node_in_path] = [node]
-                            first_path = False
-                    elif node[0] == 'w':
-                        try:
-                            matched_dict[previous_node_in_path].remove(path[0][index_of_node - 2])
-                            matched_dict[previous_node_in_path].append(node)
-                        except KeyError:
-                            matched_dict[previous_node_in_path].remove(path[0][path[0].index(node) - 2])
-                            matched_dict[previous_node_in_path] = [node]
-            else:
-                raise TypeError('Returned type of path is not acceptable.')
-
-        return matched_dict
-
-if __name__ == '__main__':
-    # Testing of bipartate class which is built on Graph class
-    tasks_map = {'tas1': ['w1'], 'tas2': ['w2'], 'tas3': ['w1']}
-    workers = {'w1': 1, 'w2': 1, 'w3': 1}
-    a = Bipartate_case1(tasks_map, workers)
-
-    # Testing using both algorithms
-    print(a.match('ford-f'))
-    print(a.match('edmond-k'))
-
-    # THis is Testing of graph class itself where graph is constructed using the conn array
-    # The connection array is comprised of smaller arrays, each small array
-    # represents an edge ['source_node', 'Destination_node', 'Weight_of_edge']
-
-    conn = [['s', 'a', 15], ['s', 'c', 20], ['a', 'c', 10], ['a', 'b', 3], ['c', 'b', 12], ['c', 't', 15],
-            ['b', 't', 20]]
-    b = Graph(conn)
-    # network flow using Ford-f
-    print(b.network_flow('s', 't'))
-
-    # flow using ed-k
-    print(b.network_flow('s', 't', True))

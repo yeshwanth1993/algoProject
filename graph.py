@@ -25,6 +25,16 @@ class Graph (object):
             if self.g[s][i][0] == t:
                 del self.g[s][i]
                 return
+    def find_connection(self, s, t):
+        """Return weight between s and t, if no connection return 0"""
+        try:
+            for node in self.g[s]:
+                if node[0] == t:
+                    return node[1]
+
+            return 0
+        except KeyError:
+            return 0
 
     def remove_node(self, node):
         try:
@@ -153,7 +163,7 @@ class Graph (object):
         except KeyError:
             pass
 
-class Bipartate(Graph):
+class Bipartate_case1(Graph):
     def __init__(self, tasks_mapping, worker_limit):
         Graph.__init__(self, [])
         for task in tasks_mapping:
@@ -183,21 +193,23 @@ class Bipartate(Graph):
             elif len(path[0]) == 6:
                 first_path = True
                 for node in path[0]:
+                    index_of_node = path[0].index(node)
+                    previous_node_in_path = path[0][index_of_node - 1]
+
                     if node[0] == 'w' and first_path:
                         try:
-                            matched_dict[path[0][path[0].index(node) - 1]].append(node)
+                            matched_dict[previous_node_in_path].append(node)
                             first_path = False
                         except KeyError:
-                            matched_dict[path[0][path[0].index(node) - 1]] = [node]
+                            matched_dict[previous_node_in_path] = [node]
                             first_path = False
                     elif node[0] == 'w':
                         try:
-                            matched_dict[path[0][path[0].index(node) - 1]].remove(path[0][path[0].index(node) - 2])
-                            matched_dict[path[0][path[0].index(node) - 1]].append(node)
+                            matched_dict[previous_node_in_path].remove(path[0][index_of_node - 2])
+                            matched_dict[previous_node_in_path].append(node)
                         except KeyError:
-                            matched_dict[path[0][path[0].index(node) - 1]].remove(path[0][path[0].index(node) - 2])
-                            matched_dict[path[0][path[0].index(node) - 1]] = [node]
-
+                            matched_dict[previous_node_in_path].remove(path[0][path[0].index(node) - 2])
+                            matched_dict[previous_node_in_path] = [node]
             else:
                 raise TypeError('Returned type of path is not acceptable.')
 
@@ -207,7 +219,7 @@ if __name__ == '__main__':
     # Testing of bipartate class which is built on Graph class
     tasks_map = {'tas1': ['w1'], 'tas2': ['w2'], 'tas3': ['w1']}
     workers = {'w1': 1, 'w2': 1, 'w3': 1}
-    a = Bipartate(tasks_map, workers)
+    a = Bipartate_case1(tasks_map, workers)
 
     # Testing using both algorithms
     print(a.match('ford-f'))
@@ -217,9 +229,10 @@ if __name__ == '__main__':
     # The connection array is comprised of smaller arrays, each small array
     # represents an edge ['source_node', 'Destination_node', 'Weight_of_edge']
 
-    conn = [['s', 'a', 15], ['s', 'c', 20], ['a', 'c', 10], ['a', 'b', 3], ['c', 'b', 12], ['c', 't', 15], ['b', 't', 20]]
+    conn = [['s', 'a', 15], ['s', 'c', 20], ['a', 'c', 10], ['a', 'b', 3], ['c', 'b', 12], ['c', 't', 15],
+            ['b', 't', 20]]
     b = Graph(conn)
-    # network flow usinf Ford-f
+    # network flow using Ford-f
     print(b.network_flow('s', 't'))
 
     # flow using ed-k

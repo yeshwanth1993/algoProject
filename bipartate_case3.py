@@ -1,5 +1,6 @@
 from graph import *
 import sys
+import time
 
 class Bipartate_case3(Graph):
     def __init__(self, tasks_list):
@@ -26,10 +27,12 @@ class Bipartate_case3(Graph):
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
 
         # finding min cut in residual graph
+        print('Residual-graph')
         print(residual_graph.g)
+
         visited_paths = []
         residual_graph.dfs_wo_pop('s', 't', visited_paths)
-        print(visited_paths)
+        visited_paths
 
 
 
@@ -38,4 +41,10 @@ if __name__ == "__main__":
     tasks = {'1': [10, ['3', '2']], '2': [-10, []], '3': [5, ['2']], '4': [-4, ['1']]}
 
     a = Bipartate_case3(tasks)
+
+    start = time.time()
     print(a.match())
+
+    time = time.time() - start
+
+    print('Time:' + str(time))

@@ -84,19 +84,22 @@ class Graph (object):
         return False
 
     def dfs_wo_pop(self, s, t, x):
+        print(s)
         x.append(s)
         try:
             for i in range(len(self.g[s])):
-                if self.g[s][i][0] in x:
+                edge_to = self.g[s][i][0]
+                if edge_to in x:
                     continue
-                if self.g[s][i][0] == t:
+                if edge_to == t:
                     x.append(t)
                     return True
-                status = self.dfs(self.g[s][i][0], t, x)
+                status = self.dfs_wo_pop(edge_to, t, x)
                 if status:
                     return True
 
-        except:
+        except Exception as e:
+            print(str(e))
             return False
 
         return False

@@ -26,7 +26,6 @@ class Bipartate_case2(Graph):
         for node in worker_limit:
             self.add_connection([node, 't', worker_limit[node][0]])
 
-
     def match(self, algorithm='ford-f'):
         """DES: A bipartite matching is done by calculating the max-flow and the paths used while caluculating the flow
         are used to find out the matches."""

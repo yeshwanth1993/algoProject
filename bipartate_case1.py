@@ -1,5 +1,6 @@
 from graph import *
 from req_functions import *
+import time
 
 class Bipartate_case1(Graph):
     def __init__(self, tasks_mapping, worker_limit):
@@ -21,24 +22,24 @@ class Bipartate_case1(Graph):
         for node in worker_limit:
             self.add_connection([node, 't', worker_limit[node]])
 
-    def match(self, algorithm='ford-f'):
+    def match(self, algo):
         """DES: A bipartite matching is done by calculating the max-flow and the paths used while caluculating the flow
         are used to find out the matches."""
-        if algorithm == 'ford-f':
-            flow, paths_taken, residual_graph = self.network_flow('s', 't')
-        elif algorithm == 'edmond-k':
-            flow, paths_taken, residual_graph = self.network_flow('s', 't', True)
+        start = time.time()
+        if algo == 'ff' or algo == 'ek':
+            flow, paths_taken, residual_graph = self.network_flow('s', 't', algo)
         else:
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
-        print(paths_taken)
+        # print(paths_taken)
         # parse_paths takes in the paths taken during the caluculation of the max flow and gives the matches b/w
         # workers and tasks
-        matched_dict = parse_paths(paths_taken, {})
-        return matched_dict
+        # matched_dict = parse_paths(paths_taken, {})
+        end = time.time()
+        return {}, end - start, flow
 
 if __name__ == '__main__':
     # Testing of bipartate class which is built on Graph class
-    tasks_map = {'tas1': ['w1'], 'tas2': ['w2'], 'tas3': ['w1']}
+    tasks_map = {  'tas2': ['w2'], 'tas3': ['w1']}
     workers = {'w1': 1, 'w2': 1, 'w3': 1}
     a = Bipartate_case1(tasks_map, workers)
 

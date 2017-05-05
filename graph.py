@@ -185,12 +185,25 @@ class Graph (object):
     def find_a_path(self, s, t):
         """Des: uses DFS to return a path"""
         visited = []
+        path = []
         status = self.dfs(s, t, visited)
-        if status:
-            return visited
-        return []
 
-    def network_flow(self, s, t, ek=False):
+        if status:
+            for i in visited:
+                path.append(i)
+            path = []
+            for i in visited:
+                path.append(i)
+            path = []
+            for i in visited:
+                path.append(i)
+
+            path.reverse()
+            path.reverse()
+            return path
+        return path
+
+    def network_flow(self, s, t, algo):
         """DES: Calculates flow from S to T, first copies graph so that which flow calculations the graph is not affected
         due to formations of residual graphs. THe same algorithm can be used to calculate flow using both Edmon-Karp
         and Ford fulkerson.
@@ -204,10 +217,12 @@ class Graph (object):
         residual_graph = copy.deepcopy(self)
         while True:
             # Finding a path
-            if ek:
+            if algo == 'ek':
                 path = copy_of_self.find_shortest_path(s, t)
-            else:
+            elif algo == 'ff':
                 path = copy_of_self.find_a_path(s, t)
+            else:
+                raise ValueError('Wrong algorithm specified')
 
             # Once the length of the path is zero, return the flow
             if len(path) == 0:
@@ -262,3 +277,5 @@ class Graph (object):
             pass
         return self
 
+if __name__ == "__main__":
+    connections = [['a', 'b', 1], ['c', 'd', 2]]

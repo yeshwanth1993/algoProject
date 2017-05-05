@@ -60,7 +60,7 @@ if __name__ == "__main__":
 
     start = time.time()
     print(sorted([int(i) for i in a.match(algo='ff')]))
-
+    print(sorted([int(i) for i in a.match(algo='ek')]))
     #time = time.time() - start
 
     #print('Time:' + str(time))

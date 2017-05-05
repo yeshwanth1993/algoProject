@@ -26,17 +26,16 @@ class Bipartate_case2(Graph):
         for node in worker_limit:
             self.add_connection([node, 't', worker_limit[node][0]])
 
-    def match(self, algorithm='ford-f'):
+    def match(self, algo='ford-f'):
         """DES: A bipartite matching is done by calculating the max-flow and the paths used while caluculating the flow
         are used to find out the matches."""
 
         # calculating flow, this will make sure all the minimum constraint of s=workers are satisfied
-        if algorithm == 'ford-f':
-            flow, paths_taken, residual_graph = self.network_flow('s', 't')
-        elif algorithm == 'edmond-k':
-            flow, paths_taken, residual_graph = self.network_flow('s', 't', True)
+        if algo == 'ff' or algo == 'ek':
+            flow, paths_taken, residual_graph, time = self.network_flow('s', 't', algo)
         else:
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
+
         print('Step-1')
         print(parse_paths(paths_taken, {}))
 
@@ -57,10 +56,12 @@ class Bipartate_case2(Graph):
                 residual_graph.add_connection(['s', task, min_val_of_task-weight_to_src])
 
         # running maz flow again, now min constraints of tasks is satisfied
-        if algorithm == 'ford-f':
-            flow, paths_taken2, residual_graph = residual_graph.network_flow('s', 't')
-        elif algorithm == 'edmond-k':
-            flow, paths_taken2, residual_graph = residual_graph.network_flow('s', 't', True)
+
+        if algo == 'ff' or algo == 'ek':
+            flow, paths_taken2, residual_graph, time = residual_graph.network_flow('s', 't', algo)
+        else:
+            raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
+
 
         paths_taken += paths_taken2
 
@@ -76,16 +77,27 @@ class Bipartate_case2(Graph):
             if weight_to_src < max_val_of_task:
                 residual_graph.add_connection(['s', task, max_val_of_task - weight_to_src])
 
-        if algorithm == 'ford-f':
-            flow, paths_taken3, residual_graph = residual_graph.network_flow('s', 't')
-        elif algorithm == 'edmond-k':
-            flow, paths_taken3, residual_graph = residual_graph.network_flow('s', 't', True)
+        if algo == 'ff' or algo == 'ek':
+            flow, paths_taken3, residual_graph, time = residual_graph.network_flow('s', 't', algo)
+        else:
+            raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
 
         paths_taken += paths_taken3
 
         # Parsing all the paths taken to find suitable matches
         matched_dict = parse_paths(paths_taken, {})
         print('Step-3')
+        print('Paths Taken')
+        print(paths_taken)
+
+        print('clean')
+        paths_taken = clean_path(paths_taken)
+        print(paths_taken)
+
+        print('Test')
+        print(parse_paths(paths_taken, {}))
+        print('working:')
+        print(parse_paths2(paths_taken, {}))
 
         # Returning the matches
         return matched_dict
@@ -93,15 +105,15 @@ class Bipartate_case2(Graph):
 
 if __name__ == '__main__':
     # Testing of bipartate class which is built on Graph class
-    tasks_map = {'tas1': (['w1', 'w2', 'w5'], [2, 5]), 'tas2': (['w1', 'w2', 'w4', 'w5'], [3, 6]),
-                 'tas3': (['w2', 'w3', 'w4', 'w5'], [3, 4])}
+    tasks_map = {'tas1': (['w1', 'w2','w5'], [2, 5]), 'tas2': (['w1','w2','w4','w5'], [3, 6]),'tas3':(['w2','w3','w4','w5'],[3,4])}
 
-    workers = {'w1': [1, 4], 'w2': [2, 5], 'w3': [1, 3], 'w4': [1, 2], 'w5': [2, 3]}
+    workers = {'w1': [1, 1], 'w2': [1, 1],'w3':[1,3],'w4':[1,2],'w5':[2,3]}
     a = Bipartate_case2(tasks_map, workers)
+
 
     # Testing using both algorithms
     # print(a.match('ford-f'))
     # print(a.match('edmond-k'))
     print('Mapping:')
-    print(a.match())
+    a.match(algo='ff')
 

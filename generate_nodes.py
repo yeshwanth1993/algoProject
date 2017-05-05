@@ -2,6 +2,8 @@ import random_generation
 from bipartate_case1 import *
 from bipartate_case2 import *
 from bipartate_case3 import *
+from createDAG import *
+from graph import Graph
 import matplotlib.pyplot as plt
 
 def test_case1(no_of_nodes, increment):
@@ -20,15 +22,10 @@ def test_case1(no_of_nodes, increment):
         matches, ford_time, flow1 = case1_graph.match(algo='ff')
         matches, edmond_time, flow2 = case1_graph.match(algo='ek')
 
-        #if flow1 != flow2:
-         #   raise ValueError('Algo is wrong')
-
         iterations.append(i)
         ford_time_arr.append(ford_time)
         edmond_time_arr.append(edmond_time)
         flow_arr.append(flow1/100)
-
-
 
     # plt.plot(iterations, flow_arr, c='R', marker='.',label='Ford Fulkerson')
 
@@ -47,7 +44,7 @@ def test_case1(no_of_nodes, increment):
 
     return
 
-def test_case3(no_of_nodes, increment):
+def test_general(no_of_nodes, increment):
     iterations = []
     ford_time_arr = []
     edmond_time_arr = []
@@ -55,24 +52,16 @@ def test_case3(no_of_nodes, increment):
     for i in range(increment, no_of_nodes, increment):
         # print('***')
         # Case where both tasks and workers increase
-        tasks = random_generation.get_input_cases_task3(num_tasks=i)
+        connections = create_graph(num_vertices=i)
 
-        case3_graph = Bipartate_case3(tasks_list=tasks)
+        gra = Graph(connections=connections)
 
-
-        matches, ford_time = case3_graph.match(algo='ff')
-        matches, edmond_time = case3_graph.match(algo='ek')
-
-        #if flow1 != flow2:
-         #   raise ValueError('Algo is wrong')
+        flow, paths_taken, residual_graph, ford_time = gra.network_flow('1', str(i), algo='ff')
+        flow, paths_taken, residual_graph, edmond_time = gra.network_flow('1', str(i), algo='ek')
 
         iterations.append(i)
         ford_time_arr.append(ford_time)
         edmond_time_arr.append(edmond_time)
-
-
-
-    # plt.plot(iterations, flow_arr, c='R', marker='.',label='Ford Fulkerson')
 
     fig = plt.figure()
     plt.plot(iterations, edmond_time_arr, c='G', marker='8',label='Edmond Karp')
@@ -84,12 +73,9 @@ def test_case3(no_of_nodes, increment):
     plt.show()
     print(iterations, ford_time_arr)
 
-    # print('mac - ek:' + str(max(edmond_time_arr)))
-    # print('mac - ff:' + str(max(ford_time_arr)))
-
     return
 
 
 if __name__ == "__main__":
 
-    test_case3(200, 10)
+    test_general(1000, 2)

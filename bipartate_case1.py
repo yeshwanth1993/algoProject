@@ -30,6 +30,7 @@ class Bipartate_case1(Graph):
             flow, paths_taken, residual_graph = self.network_flow('s', 't', algo)
         else:
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
+
         # print(paths_taken)
         # parse_paths takes in the paths taken during the caluculation of the max flow and gives the matches b/w
         # workers and tasks

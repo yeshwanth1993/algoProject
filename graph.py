@@ -1,5 +1,6 @@
 # import required libraries
 import copy
+import time
 
 class Graph (object):
     def __init__(self, connections):
@@ -204,6 +205,7 @@ class Graph (object):
         return path
 
     def network_flow(self, s, t, algo):
+        start = time.time()
         """DES: Calculates flow from S to T, first copies graph so that which flow calculations the graph is not affected
         due to formations of residual graphs. THe same algorithm can be used to calculate flow using both Edmon-Karp
         and Ford fulkerson.
@@ -226,7 +228,7 @@ class Graph (object):
 
             # Once the length of the path is zero, return the flow
             if len(path) == 0:
-                return flow, paths_taken, residual_graph
+                return flow, paths_taken, residual_graph, time.time() - start
 
             # Calculate the flow for that augmenting path and append it to the paths_taken array which ll later help us
             # find the matches in the bipartite graph
@@ -267,7 +269,12 @@ class Graph (object):
                             self.g[path[i]][j][1] = self.g[path[i]][j][1] - flow
 
                             if self.g[path[i]][j][1] == 0:
+                                print('removed connection')
+                                print(path[i], path[i+1])
+
                                 self.remove_connection(path[i], path[i+1])
+                                print(self.g)
+
 
                             self.add_connection([path[i+1], path[i], flow])
                     except IndexError:

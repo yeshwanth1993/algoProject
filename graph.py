@@ -275,7 +275,6 @@ class Graph (object):
                                 self.remove_connection(path[i], path[i+1])
                                 print(self.g)
 
-
                             self.add_connection([path[i+1], path[i], flow])
                     except IndexError:
                         continue

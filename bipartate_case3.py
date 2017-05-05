@@ -36,7 +36,7 @@ class Bipartate_case3(Graph):
         start = time.time()
         # Calculating the required flow and residual graph
         if algo == 'ff' or algo == 'ek':
-            flow, paths_taken, residual_graph = self.network_flow('s', 't', algo)
+            flow, paths_taken, residual_graph, time = self.network_flow('s', 't', algo)
         else:
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
 

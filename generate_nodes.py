@@ -77,5 +77,5 @@ def test_general(no_of_nodes, increment):
 
 
 if __name__ == "__main__":
-
+    test_case1(1000, 2)
     test_general(1000, 2)

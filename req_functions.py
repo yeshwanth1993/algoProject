@@ -1,7 +1,7 @@
 def parse_paths(paths_taken, matched_dict):
     for path in paths_taken:
         if len(path[0]) == 4:
-            print("removeed")
+            
             for node in path[0]:
                 if node[0] == 'w':
                     try:
@@ -46,7 +46,7 @@ def parse_paths(paths_taken, matched_dict):
 
                 node = path[node_index]
                 next_node = path[node_index+1]
-                print("removeed")
+              
                 print(node)
                 if node[0] == 't' and node[1] == 'a':
                     if matched_dict[node]:
@@ -122,7 +122,7 @@ def parse_paths2(paths_taken, matched_dict):
                     if node[0] == 'w':
                        # print("RRR")
                         if next_node[0] == 't' and next_node[1] == 'a':
-                            print("RRR")
+                           
                             matched_dict[next_node].remove(node)
 
                 except IndexError:

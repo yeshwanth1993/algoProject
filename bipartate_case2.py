@@ -101,7 +101,7 @@ if __name__ == '__main__':
     # Testing of bipartate class which is built on Graph class
     tasks_map = {'tas1': (['w1', 'w2','w5'], [2, 5]), 'tas2': (['w1','w2','w4','w5'], [3, 6]),'tas3':(['w2','w3','w4','w5'],[3,4])}
 
-    workers = {'w1': [1, 1], 'w2': [1, 1],'w3':[1,3],'w4':[1,2],'w5':[2,3]}
+    workers = {'w1': [1, 2], 'w2': [1, 2],'w3':[1,3],'w4':[1,2],'w5':[2,3]}
     a = Bipartate_case2(tasks_map, workers)
 
 

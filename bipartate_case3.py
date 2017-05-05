@@ -54,13 +54,13 @@ class Bipartate_case3(Graph):
 
 
 if __name__ == "__main__":
-    tasks = {'1': [10, ['3', '2']], '2': [-10, []], '3': [5, ['2']], '4': [-4, ['1']]}
+    tasks = {'1': [10, ['3', '2']], '2': [-10, []], '3': [5, ['2']], '4': [10, ['1']]}
     tasks1 = {'1': [7, ['5']], '2': [3, ['6']], '3': [2, []], '4': [2, []],'5':[-7,[]],'6':[-2,[]],'7':[-4,['3']]}
-    a = Bipartate_case3(tasks1)
+    a = Bipartate_case3(tasks)
 
     start = time.time()
-    print(sorted([int(i) for i in a.match(algo='ff')]))
-    print(sorted([int(i) for i in a.match(algo='ek')]))
-    #time = time.time() - start
+    result_ff = sorted([int(i) for i in a.match(algo='ff')])
+    print(result_ff)
 
-    #print('Time:' + str(time))
+    result_ek = sorted([int(i) for i in a.match(algo='ek')])
+    print(result_ek)

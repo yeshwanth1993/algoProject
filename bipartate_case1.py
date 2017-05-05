@@ -36,12 +36,12 @@ class Bipartate_case1(Graph):
         # workers and tasks
         # matched_dict = parse_paths(paths_taken, {})
         end = time.time()
-        return parse_paths2(paths_taken, {})
+        return parse_paths(paths_taken, {})
 
 if __name__ == '__main__':
     # Testing of bipartate class which is built on Graph class
-    tasks_map = {  'tas1':['w2'],'tas2': ['w2'], 'tas3': ['w1']}
-    workers = {'w1': 2, 'w2':1,'w3': 1}
+    tasks_map = {'tas1': ['w2'], 'tas2': ['w2'], 'tas3': ['w1']}
+    workers = {'w1': 2, 'w2': 1}
 
     a = Bipartate_case1(tasks_map, workers)
 

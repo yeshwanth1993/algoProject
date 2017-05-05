@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f791a43b-369a-4b45-bb63-ca613fee1b1f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/generate_nodes.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/readCSV.py" afterPath="$PROJECT_DIR$/random_generation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bipartate_case1.py" afterPath="$PROJECT_DIR$/bipartate_case1.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/graph.py" afterPath="$PROJECT_DIR$/graph.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/generate_nodes.py" afterPath="$PROJECT_DIR$/generate_nodes.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/random_generation.py" afterPath="$PROJECT_DIR$/random_generation.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,7 +19,7 @@
     <SUITE FILE_PATH="coverage/algoProject1$graph.coverage" NAME="graph Coverage Results" MODIFIED="1493313032828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/algoProject1$bipartate.coverage" NAME="bipartate Coverage Results" MODIFIED="1493310058350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/algoProject1$bipartate_case1.coverage" NAME="bipartate_case1 Coverage Results" MODIFIED="1493310445388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/algoProject1$generate_nodes.coverage" NAME="generate_nodes Coverage Results" MODIFIED="1493956314328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/algoProject1$generate_nodes.coverage" NAME="generate_nodes Coverage Results" MODIFIED="1493957341126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/algoProject1$bipartate_case2.coverage" NAME="bipartate_case2 Coverage Results" MODIFIED="1493310341724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/algoProject1$readCSV.coverage" NAME="readCSV Coverage Results" MODIFIED="1493943137179" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/algoProject1$input_proc.coverage" NAME="input_proc Coverage Results" MODIFIED="1493937605857" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -42,26 +40,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="input_proc.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/input_proc.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="case3.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/case3.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="bipartate_case3.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bipartate_case3.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -74,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="generate_nodes.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="generate_nodes.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/generate_nodes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="35" column="49" lean-forward="false" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
+            <state relative-caret-position="696">
+              <caret line="95" column="14" lean-forward="true" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
               <folding>
                 <element signature="e#0#24#0" expanded="true" />
               </folding>
@@ -99,7 +77,7 @@
       <file leaf-file-name="bipartate_case2.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bipartate_case2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1354">
+            <state relative-caret-position="594">
               <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
@@ -120,11 +98,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="random_generation.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="random_generation.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/random_generation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="25" />
+            <state relative-caret-position="-324">
+              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -170,6 +148,7 @@
         <option value="$PROJECT_DIR$/req_functions.py" />
         <option value="$PROJECT_DIR$/bipartate_case1.py" />
         <option value="$PROJECT_DIR$/graph.py" />
+        <option value="$PROJECT_DIR$/random_generation.py" />
         <option value="$PROJECT_DIR$/generate_nodes.py" />
       </list>
     </option>
@@ -647,7 +626,21 @@
       <option name="project" value="LOCAL" />
       <updated>1493937685213</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="read input form csv&#10;">
+      <created>1493956504073</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1493956504073</updated>
+    </task>
+    <task id="LOCAL-00014" summary="added all random generation&#10;">
+      <created>1493956734112</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1493956734112</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -727,7 +720,8 @@
     <MESSAGE value="Added case3, formatted the code correctly" />
     <MESSAGE value="Commets added&#10;" />
     <MESSAGE value="read input form csv&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="read input form csv&#10;" />
+    <MESSAGE value="added all random generation&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="added all random generation&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -759,24 +753,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/random_generation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/input_proc.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bipartate_case3.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -803,16 +779,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bipartate_case2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1354">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bipartate_case1.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="182">
@@ -831,6 +797,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/input_proc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="61" column="0" lean-forward="true" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/graph.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1326">
@@ -839,12 +813,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bipartate_case2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/generate_nodes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="35" column="49" lean-forward="false" selection-start-line="35" selection-start-column="49" selection-end-line="35" selection-end-column="49" />
+        <state relative-caret-position="696">
+          <caret line="95" column="14" lean-forward="true" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/random_generation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-324">
+          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>

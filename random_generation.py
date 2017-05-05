@@ -13,6 +13,8 @@ def generate_inputs_task1(no_of_workers, no_of_tasks):
         suitable_workers = ['w'+s for s in suitable_workers]
         task_settings['task'+str(i)] = suitable_workers 
     return task_settings, worker_settings
+
+
 def generate_input_task3(no_of_tasks,max_profit=100):
     tasks = range(1,no_of_tasks+1)
     dependent_tasks = set(random.choice(tasks,size = random.randint(1,int(2 * no_of_tasks/3.0))))
@@ -27,6 +29,8 @@ def generate_input_task3(no_of_tasks,max_profit=100):
         profit = random.randint(1,max_profit+1)
         task_config[str(independent_tasks[i])] =[-profit , []]
     return task_config
+
+
 def get_input_cases_task3(num_tasks = 1000):
     graphs = []
     for num in range(50,num_tasks+1,50):

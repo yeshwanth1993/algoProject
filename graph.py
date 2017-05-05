@@ -269,11 +269,8 @@ class Graph (object):
                             self.g[path[i]][j][1] = self.g[path[i]][j][1] - flow
 
                             if self.g[path[i]][j][1] == 0:
-                                print('removed connection')
-                                print(path[i], path[i+1])
-
                                 self.remove_connection(path[i], path[i+1])
-                                print(self.g)
+                                #print(self.g)
 
                             self.add_connection([path[i+1], path[i], flow])
                     except IndexError:

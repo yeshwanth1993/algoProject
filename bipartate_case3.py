@@ -27,8 +27,8 @@ class Bipartate_case3(Graph):
             for prereq in tasks_list[task][1]:
                 self.add_connection([task, prereq, sys.maxsize])
 
-        print('init-graph')
-        print(self.g)
+        #print('init-graph')
+        #print(self.g)
 
     def match(self, algo):
         """DES: A bipartite matching is done by calculating the max-flow and the paths used while caluculating the flow
@@ -36,13 +36,13 @@ class Bipartate_case3(Graph):
         start = time.time()
         # Calculating the required flow and residual graph
         if algo == 'ff' or algo == 'ek':
-            flow, paths_taken, residual_graph, time = self.network_flow('s', 't', algo)
+            flow, paths_taken, residual_graph, tm = self.network_flow('s', 't', algo)
         else:
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
 
         # finding min cut in residual graph
-        print('Residual-graph')
-        print(residual_graph.g)
+        #print('Residual-graph')
+        #print(residual_graph.g)
         # DFS without pop will give all the taks which can be reached by S which actually resembles the
         # Min cut in a graph
         visited_nodes = []
@@ -50,7 +50,7 @@ class Bipartate_case3(Graph):
         del visited_nodes[visited_nodes.index('s')]
 
         # returns the visited nodes in the residual graph from S
-        return visited_nodes, time.time() - start
+        return visited_nodes
 
 
 if __name__ == "__main__":
@@ -59,8 +59,8 @@ if __name__ == "__main__":
     a = Bipartate_case3(tasks)
 
     start = time.time()
-    print(sorted([int(i) for i in a.match()]))
+    print(sorted([int(i) for i in a.match(algo='ff')]))
 
-    time = time.time() - start
+    #time = time.time() - start
 
-    print('Time:' + str(time))
+    #print('Time:' + str(time))

@@ -37,7 +37,7 @@ class Bipartate_case2(Graph):
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
 
         print('Step-1')
-        print(parse_paths(paths_taken, {}))
+        print(parse_paths2(paths_taken, {}))
 
         # adding forward edges from workers to t, after min calculation is over with the remaining weight which will be
         # equal to max- min constraints for each worker
@@ -66,7 +66,7 @@ class Bipartate_case2(Graph):
         paths_taken += paths_taken2
 
         print('Step-2')
-        print(parse_paths(paths_taken, {}))
+        print(parse_paths2(paths_taken, {}))
 
         # Finally adding all cases, so adding all the remaining edges to the graph and then calculating flow
 
@@ -87,16 +87,10 @@ class Bipartate_case2(Graph):
         # Parsing all the paths taken to find suitable matches
         matched_dict = parse_paths(paths_taken, {})
         print('Step-3')
-        print('Paths Taken')
-        print(paths_taken)
+        #print('Paths Taken')
+       # print(paths_taken)
 
-        print('clean')
-        paths_taken = clean_path(paths_taken)
-        print(paths_taken)
-
-        print('Test')
-        print(parse_paths(paths_taken, {}))
-        print('working:')
+    
         print(parse_paths2(paths_taken, {}))
 
         # Returning the matches
@@ -115,5 +109,5 @@ if __name__ == '__main__':
     # print(a.match('ford-f'))
     # print(a.match('edmond-k'))
     print('Mapping:')
-    a.match(algo='ff')
+    a.match(algo='ek')
 

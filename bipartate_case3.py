@@ -30,15 +30,13 @@ class Bipartate_case3(Graph):
         print('init-graph')
         print(self.g)
 
-    def match(self, algorithm='ford-f'):
+    def match(self, algo):
         """DES: A bipartite matching is done by calculating the max-flow and the paths used while caluculating the flow
         are used to find out the matches."""
-
+        start = time.time()
         # Calculating the required flow and residual graph
-        if algorithm == 'ford-f':
-            flow, paths_taken, residual_graph = self.network_flow('s', 't')
-        elif algorithm == 'edmond-k':
-            flow, paths_taken, residual_graph = self.network_flow('s', 't', True)
+        if algo == 'ff' or algo == 'ek':
+            flow, paths_taken, residual_graph = self.network_flow('s', 't', algo)
         else:
             raise ValueError('Algorithm parameter should either be "ford-f" or "edmond-k".')
 
@@ -52,7 +50,7 @@ class Bipartate_case3(Graph):
         del visited_nodes[visited_nodes.index('s')]
 
         # returns the visited nodes in the residual graph from S
-        return visited_nodes
+        return visited_nodes, time.time() - start
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 from graph import *
 from req_functions import *
 import time
+from input_proc import *
 
 class Bipartate_case1(Graph):
     def __init__(self, tasks_mapping, worker_limit):
@@ -43,22 +44,17 @@ if __name__ == '__main__':
     tasks_map = {'tas1': ['w2'], 'tas2': ['w2'], 'tas3': ['w1']}
     workers = {'w1': 2, 'w2': 1}
 
+    # In case you want to import the tasks and workers from a CSV the below line is an example of how to do it
+    # tasks_map1, workers1 = parse_case1('csv/case1/tasks.txt', 'csv/case1/worker.txt')
+
     a = Bipartate_case1(tasks_map, workers)
 
     # Testing using both algorithms
+    print('Mapping using Ford-fulkerson: ')
     print(a.match('ff'))
+
+    print('Mapping using Edmond-Karp:')
     print(a.match('ek'))
 
    
-    # THis is Testing of graph class itself where graph is constructed using the conn array
-    # The connection array is comprised of smaller arrays, each small array
-    # represents an edge ['source_node', 'Destination_node', 'Weight_of_edge']
 
-    #conn = [['s', 'a', 15], ['s', 'c', 20], ['a', 'c', 10], ['a', 'b', 3], ['c', 'b', 12], ['c', 't', 15],
-            #['b', 't', 20]]
-    #b = Graph(conn)
-    # network flow using Ford-f
-    #print(b.network_flow('s', 't'))
-
-    # flow using ed-k
- #   print(b.network_flow('s', 't', True))

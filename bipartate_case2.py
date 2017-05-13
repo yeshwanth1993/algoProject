@@ -1,5 +1,6 @@
 from graph import *
 from req_functions import *
+from input_proc import *
 
 class Bipartate_case2(Graph):
     def __init__(self, tasks_mapping, worker_limit):
@@ -87,11 +88,6 @@ class Bipartate_case2(Graph):
         # Parsing all the paths taken to find suitable matches
         matched_dict = parse_paths(paths_taken, {})
         print('Step-3')
-        #print('Paths Taken')
-       # print(paths_taken)
-
-    
-        print(parse_paths2(paths_taken, {}))
 
         # Returning the matches
         return matched_dict
@@ -102,12 +98,17 @@ if __name__ == '__main__':
     tasks_map = {'tas1': (['w1', 'w2','w5'], [2, 5]), 'tas2': (['w1','w2','w4','w5'], [3, 6]),'tas3':(['w2','w3','w4','w5'],[3,4])}
 
     workers = {'w1': [1, 2], 'w2': [1, 2],'w3':[1,3],'w4':[1,2],'w5':[2,3]}
+
+    # In case you want to import the tasks and workers from a CSV the below line is an example of how to do it
+    # tasks_map1, workers1 = parse_case2('csv/case2/tasks.txt', 'csv/case2/worker.txt')
+
     a = Bipartate_case2(tasks_map, workers)
 
-
     # Testing using both algorithms
-    # print(a.match('ford-f'))
-    # print(a.match('edmond-k'))
-    print('Mapping:')
-    a.match(algo='ek')
+    print('Mapping using Ford-fulkerson: ')
+    print(a.match('ff'))
+
+    print('Mapping using Edmond-Karp:')
+    print(a.match('ek'))
+
 

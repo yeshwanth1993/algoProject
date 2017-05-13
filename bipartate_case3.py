@@ -1,6 +1,7 @@
 from graph import *
 import sys
 import time
+from input_proc import *
 
 class Bipartate_case3(Graph):
     def __init__(self, tasks_list):
@@ -56,11 +57,17 @@ class Bipartate_case3(Graph):
 if __name__ == "__main__":
     tasks = {'1': [10, ['3', '2']], '2': [-10, []], '3': [5, ['2']], '4': [10, ['1']]}
     tasks1 = {'1': [7, ['5']], '2': [3, ['6']], '3': [2, []], '4': [2, []],'5':[-7,[]],'6':[-2,[]],'7':[-4,['3']]}
+
+    # In case you want to import the tasks and workers from a CSV the below line is an example of how to do it
+    # tasks_map1, workers1 = parse_case3('csv/case3/case3.txt')
+
     a = Bipartate_case3(tasks)
 
-    start = time.time()
+    # Testing using both algorithms
+    print('List of tasks to maximise profit using Ford-fulkerson: ')
     result_ff = sorted([int(i) for i in a.match(algo='ff')])
     print(result_ff)
 
+    print('List of tasks to maximise profit using Edmond-Karp:')
     result_ek = sorted([int(i) for i in a.match(algo='ek')])
     print(result_ek)

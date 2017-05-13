@@ -54,10 +54,3 @@ def parse_case3(taskfile):
 	return tasks
 
 
-tasks, worker = parse_case2('tasks.txt', 'worker.txt')
-print('Tasks: ' + str(tasks))
-print('Worker:' + str(worker))
-
-task_case3 = parse_case3('case3.txt')
-
-print('Tasks: ' + str(task_case3))
